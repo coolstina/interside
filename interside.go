@@ -17,7 +17,8 @@ package interside
 import "strconv"
 
 type Container interface {
-	Append(value interface{}) Container
+	Append(value ...interface{}) Container
+	Length() int
 	IntSlice() []int
 	UintSlice() []uint
 	Int32Slice() []int32
@@ -33,10 +34,14 @@ type container struct {
 	store []interface{}
 }
 
-func (c *container) Append(value interface{}) Container {
-	c.store = append(c.store, value)
+func (c *container) Append(value ...interface{}) Container {
+	c.store = append(c.store, value...)
 
 	return c
+}
+
+func (c *container) Length() int {
+	return len(c.store)
 }
 
 func (c *container) IntSlice() []int {

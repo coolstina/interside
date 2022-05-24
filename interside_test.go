@@ -17,6 +17,7 @@ package interside
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -26,8 +27,27 @@ func TestInterSideSuite(t *testing.T) {
 
 type InterSideSuite struct {
 	suite.Suite
+	container Container
 }
 
-func (suite *InterSideSuite) Test_() {
+func (suite *InterSideSuite) BeforeTest(suiteName, testName string) {
+	suite.container = NewContainer()
+}
 
+func (suite *InterSideSuite) Test_Uint_ToInt() {
+	suite.container.Append(uint(1), uint(2), uint(3))
+	assert.Equal(suite.T(), 3, suite.container.Length())
+
+	actual := suite.container.IntSlice()
+	assert.NotNil(suite.T(), actual)
+	assert.Len(suite.T(), actual, 3)
+}
+
+func (suite *InterSideSuite) Test_UInt_ToString() {
+	suite.container.Append(5, 6, 7)
+	assert.Equal(suite.T(), 3, suite.container.Length())
+
+	actual := suite.container.StringSlice()
+	assert.NotNil(suite.T(), actual)
+	assert.Len(suite.T(), actual, 3)
 }
