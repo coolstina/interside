@@ -24,6 +24,7 @@ type Container interface {
 	Int32Slice() []int32
 	Int64Slice() []int64
 	StringSlice() []string
+	InterfaceSlice() []interface{}
 }
 
 func NewContainer() *container {
@@ -32,6 +33,11 @@ func NewContainer() *container {
 
 type container struct {
 	store []interface{}
+}
+
+// InterfaceSlice returns interface slice.
+func (c *container) InterfaceSlice() []interface{} {
+	return c.store
 }
 
 func (c *container) Append(value ...interface{}) Container {
