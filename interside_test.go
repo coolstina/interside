@@ -51,3 +51,12 @@ func (suite *InterSideSuite) Test_UInt_ToString() {
 	assert.NotNil(suite.T(), actual)
 	assert.Len(suite.T(), actual, 3)
 }
+
+func (suite *InterSideSuite) Test_UInt_ToInterface() {
+	suite.container.Append(5, 6, 7)
+	assert.Equal(suite.T(), 3, suite.container.Length())
+
+	actual := suite.container.InterfaceSlice()
+	assert.NotNil(suite.T(), actual)
+	assert.Len(suite.T(), actual, 3)
+}
